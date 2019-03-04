@@ -8,8 +8,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sunshine-utils
-PKG_VERSION:=3.0.0
-PKG_RELEASE:=1
+PKG_VERSION:=3.0.2
+PKG_RELEASE:=3
 PKG_LICENSE:=BSD-2-Clause
 
 PKG_MAINTAINER:=xymopen <xuyiming.open@outlook.com>
