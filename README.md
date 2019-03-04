@@ -13,7 +13,7 @@ After installing this package, create a [hotplug](https://openwrt.org/docs/guide
 
 # nwk_login.sh
 # login to sunshine
-# Version		: 2.2.1
+# Version		: 2.2.2
 # Author		: xymopen <xuyiming.open@outlook.com>
 # Licensed		: BSD-2-Clause
 
@@ -29,7 +29,7 @@ CURL_ARGS="\
 	-H 'Referer: http://$PORTAL/index.php'\
 "
 
-if [[ "${INTERFACE}" = "$WAN_IF" ]]; then
+if [ "${INTERFACE}" = "$WAN_IF" ]; then
 	. /usr/share/libubox/jshn.sh
 	. /usr/lib/sunshine/functions.sh
 

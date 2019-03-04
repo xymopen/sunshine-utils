@@ -7,7 +7,7 @@ sunshine_loadstatus() {
 	local portal
 	local res
 
-	if [[ -z "$1" ]]; then
+	if [ -z "$1" ]; then
 		return 2 # ENOENT
 	else
 		portal="$1"
@@ -21,7 +21,7 @@ sunshine_loadstatus() {
 
 	status=$?
 
-	if  [[ $status -eq 0 && -n "$res" ]]; then
+	if  [ $status -eq 0 -a -n "$res" ]; then
 		json_cleanup
 		json_load "$res"
 	else
@@ -37,9 +37,9 @@ sunshine_checkstatus() {
 
 	echo $info
 
-	if [[ $status -eq 1 ]]; then
+	if [ $status -eq 1 ]; then
 		return 0
-	elif [[ $status -eq 0 ]]; then
+	elif [ $status -eq 0 ]; then
 		return 1 # EPERM
 	else
 		return $status
@@ -64,23 +64,23 @@ sunshine_login() {
 	local porta username domain password enablemacauth
 	local res status info
 
-	if [[ -z "$1" ]]; then
+	if [ -z "$1" ]; then
 		return 2 # ENOENT
 	else
 		portal="$1"
 		shift
 	fi
 
-	if [[ -z "$1" ]]; then
+	if [ -z "$1" ]; then
 		return 1 # EPERM
 	else
 		username="$1"
 		shift
 	fi
 
-	if [[ -z "$1" ]]; then
+	if [ -z "$1" ]; then
 		return 1 # EPERM
-	elif [[ "$1" = "internet" ]]; then
+	elif [ "$1" = "internet" ]; then
 		domain=""
 		shift
 	else
@@ -88,14 +88,14 @@ sunshine_login() {
 		shift
 	fi
 
-	if [[ -z "$1" ]]; then
+	if [ -z "$1" ]; then
 		return 1 # EPERM
 	else
 		password="$(echo -n "$1" | base64 -)"
 		shift
 	fi
 
-	if [[ "$1" = "1" -o "$1" = "0" ]]; then
+	if [ "$1" = "1" -o "$1" = "0" ]; then
 		enablemacauth="$1"
 		shift
 	else
@@ -115,7 +115,7 @@ sunshine_login() {
 
 	status=$?
 
-	if  [[ $status -eq 0 && -n "$res" ]]; then
+	if  [ $status -eq 0 -a -n "$res" ]; then
 		json_load "$res"
 		json_get_var status status
 		json_get_var info info
@@ -123,9 +123,9 @@ sunshine_login() {
 
 		echo "$info"
 
-		if [[ $status -eq 1 ]]; then
+		if [ $status -eq 1 ]; then
 			return 0
-		elif [[ $status -eq 0 ]]; then
+		elif [ $status -eq 0 ]; then
 			return 1 # EPERM
 		else
 			return $status
@@ -140,7 +140,7 @@ sunshine_logout() {
 	local portal
 	local res status info
 
-	if [[ -z "$1" ]]; then
+	if [ -z "$1" ]; then
 		return 2 # ENOENT
 	else
 		portal="$1"
@@ -155,7 +155,7 @@ sunshine_logout() {
 
 	status=$?
 
-	if  [[ $status -eq 0 && -n "$res" ]]; then
+	if  [ $status -eq 0 -a -n "$res" ]; then
 		json_load "$res"
 		json_get_var status status
 		json_get_var info info
@@ -163,9 +163,9 @@ sunshine_logout() {
 
 		echo "$info"
 
-		if [[ $status -eq 1 ]]; then
+		if [ $status -eq 1 ]; then
 			return 0
-		elif [[ $status -eq 0 ]]; then
+		elif [ $status -eq 0 ]; then
 			return 1 # EPERM
 		else
 			return $status
