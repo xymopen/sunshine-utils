@@ -13,7 +13,7 @@ After installing this package, create a [hotplug](https://openwrt.org/docs/guide
 
 # nwk_login.sh
 # login to sunshine
-# Version		: 2.2.0
+# Version		: 2.2.1
 # Author		: xymopen <xuyiming.open@outlook.com>
 # Licensed		: BSD-2-Clause
 
@@ -39,10 +39,10 @@ if [[ "${INTERFACE}" = "$WAN_IF" ]]; then
 
 			i=1
 
-			while true; do
-				sunshine_login "$PORTAL" $CURL_ARGS "YOUR_USERNAME" "YOUR_ISP" "YOUR_PASSWORD"
+			while [ $i -lt 5 ]; do
+				sunshine_login "$PORTAL" "YOUR_USERNAME" "YOUR_ISP" "YOUR_PASSWORD" $CURL_ARGS
 
-				if [ $i -lt 5 ] && sunshine_loadstatus "$PORTAL" $CURL_ARGS && sunshine_checkstatus; then
+				if sunshine_loadstatus "$PORTAL" $CURL_ARGS && sunshine_checkstatus; then
 					logger -t "nwk_login" -s "login succeed."
 					json_get_var username logout_username
 
