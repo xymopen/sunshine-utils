@@ -95,11 +95,11 @@ sunshine_login() {
 		shift
 	fi
 
-	if [[ -z "$1" ]]; then
-		enablemacauth="0"
-	elif [[ "$1" = "1" -o "$1" = "0" ]]; then
+	if [[ "$1" = "1" -o "$1" = "0" ]]; then
 		enablemacauth="$1"
 		shift
+	else
+		enablemacauth="0"
 	fi
 
 	res=$(curl -s "http://$portal/index.php/index/login" \
